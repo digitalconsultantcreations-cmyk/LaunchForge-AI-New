@@ -1,475 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LaunchForge AI Builder</title>
+  <title>LaunchForge AI Builder</title>
 
-<link rel="stylesheet" href="style.css">
-
-<style>
-
-.builder-page {
-  min-height: 100vh;
-  background: #070914;
-}
-
-.builder-top {
-  height: 70px;
-  border-bottom: 1px solid #20243a;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 25px;
-  background: #090c18;
-}
-
-.back-link {
-  color: #a8afc5;
-  font-size: 13px;
-}
-
-.builder-title {
-  font-weight: 800;
-}
-
-.builder-layout {
-  display: grid;
-  grid-template-columns: 270px 1fr;
-  min-height: calc(100vh - 70px);
-}
-
-.builder-sidebar {
-  border-right: 1px solid #20243a;
-  background: #090c18;
-  padding: 25px;
-}
-
-.builder-sidebar h3 {
-  margin-bottom: 25px;
-}
-
-.side-button {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  color: #8e96ad;
-  text-align: left;
-  padding: 13px;
-  border-radius: 8px;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.side-button.active,
-.side-button:hover {
-  background: #191633;
-  color: #b1a4ff;
-}
-
-.credits-box {
-  margin-top: 40px;
-  padding: 18px;
-  border: 1px solid #292e47;
-  border-radius: 10px;
-  background: #0e1120;
-}
-
-.credits-box small {
-  color: #777f96;
-}
-
-.credits-box strong {
-  display: block;
-  font-size: 25px;
-  margin-top: 5px;
-}
-
-.builder-main {
-  padding: 35px;
-}
-
-.builder-header {
-  margin-bottom: 30px;
-}
-
-.builder-header small {
-  color: #8d7bff;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.builder-header h1 {
-  font-size: 38px;
-  margin: 5px 0;
-}
-
-.builder-header p {
-  color: #8f97ad;
-}
-
-.builder-grid {
-  display: grid;
-  grid-template-columns: 430px 1fr;
-  gap: 20px;
-}
-
-.builder-card {
-  border: 1px solid #282d45;
-  border-radius: 14px;
-  background: #0d1020;
-  overflow: hidden;
-}
-
-.card-header {
-  padding: 18px 20px;
-  border-bottom: 1px solid #252a40;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.chat-area {
-  height: 420px;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-.message {
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  font-size: 13px;
-}
-
-.ai-message {
-  background: #15182a;
-  color: #aeb5ca;
-}
-
-.user-message {
-  background: #211b49;
-  color: #d8d4ff;
-  margin-left: 30px;
-}
-
-.message strong {
-  display: block;
-  margin-bottom: 5px;
-  color: #9c8cff;
-}
-
-.prompt-area {
-  border-top: 1px solid #252a40;
-  padding: 18px;
-}
-
-.prompt-area textarea {
-  width: 100%;
-  min-height: 90px;
-  resize: vertical;
-  border: 1px solid #30354d;
-  border-radius: 9px;
-  background: #080b16;
-  color: white;
-  padding: 12px;
-  font-family: inherit;
-  outline: none;
-}
-
-.prompt-area textarea:focus {
-  border-color: #7b5cff;
-}
-
-.generate-button {
-  width: 100%;
-  border: 0;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.preview-window {
-  min-height: 560px;
-}
-
-.preview-content {
-  padding: 30px;
-  min-height: 510px;
-}
-
-.preview-placeholder {
-  height: 100%;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 1px dashed #30354d;
-  border-radius: 10px;
-  color: #6f778f;
-}
-
-.generated-business {
-  min-height: 480px;
-  padding: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #11162b, #090c18);
-}
-
-.generated-business small {
-  color: #8d7bff;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.generated-business h2 {
-  font-size: 42px;
-  margin: 10px 0;
-}
-
-.generated-business .headline {
-  font-size: 21px;
-  color: #c1c7d8;
-  margin-bottom: 15px;
-}
-
-.generated-business p {
-  color: #8e96ad;
-  max-width: 600px;
-}
-
-.business-services {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 30px 0;
-}
-
-.business-service {
-  padding: 15px;
-  border: 1px solid #292e47;
-  border-radius: 8px;
-  color: #a5acc0;
-  font-size: 12px;
-}
-
-.status {
-  color: #7b5cff;
-  font-size: 12px;
-  margin-top: 10px;
-}
-
-@media(max-width: 950px) {
-
-  .builder-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .builder-sidebar {
-    display: none;
-  }
-
-  .builder-grid {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-@media(max-width: 600px) {
-
-  .builder-main {
-    padding: 20px;
-  }
-
-  .builder-header h1 {
-    font-size: 30px;
-  }
-
-  .business-services {
-    grid-template-columns: 1fr;
-  }
-
-  .generated-business {
-    padding: 25px;
-  }
-
-  .generated-business h2 {
-    font-size: 32px;
-  }
-
-}
-
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
+<body>
 
-<body class="builder-page">
+  <header class="builder-topbar">
 
+    <a href="index.html" class="logo">
+      LaunchForge <span>AI</span>
+    </a>
 
-<header class="builder-top">
+    <div class="credits">
+      ✦ <span id="credits">25</span> credits
+    </div>
 
-  <a href="index.html" class="back-link">
-    ← Back to LaunchForge
-  </a>
-
-  <div class="builder-title">
-    ✦ LaunchForge AI
-  </div>
-
-</header>
+  </header>
 
 
-<div class="builder-layout">
+  <main class="builder">
 
+    <!-- LEFT SIDE -->
 
-<aside class="builder-sidebar">
+    <section class="builder-panel">
 
-  <h3>Your Workspace</h3>
+      <div class="builder-heading">
 
-  <button class="side-button active">
-    ✦ AI Builder
-  </button>
-
-  <button class="side-button">
-    ◈ Business Stack
-  </button>
-
-  <button class="side-button">
-    ◇ Revenue
-  </button>
-
-  <button class="side-button">
-    ⚙ Settings
-  </button>
-
-
-  <div class="credits-box">
-
-    <small>AI CREDITS</small>
-
-    <strong id="credits">
-      25
-    </strong>
-
-  </div>
-
-</aside>
-
-
-<main class="builder-main">
-
-
-<div class="builder-header">
-
-  <small>AI BUSINESS BUILDER</small>
-
-  <h1>What do you want to build?</h1>
-
-  <p>
-    Describe your business idea and LaunchForge will create a
-    business concept and website preview.
-  </p>
-
-</div>
-
-
-<div class="builder-grid">
-
-
-<div class="builder-card">
-
-
-<div class="card-header">
-  CONVERSATION
-</div>
-
-
-<div id="chat" class="chat-area">
-
-  <div class="message ai-message">
-
-    <strong>LaunchForge AI</strong>
-
-    Tell me what kind of business you want to create.
-
-    <br><br>
-
-    Example:
-
-    <br>
-
-    "Create a premium mobile car detailing business."
-
-  </div>
-
-</div>
-
-
-<div class="prompt-area">
-
-  <textarea
-    id="prompt"
-    placeholder="Describe your business idea..."
-  ></textarea>
-
-  <button
-    id="generate"
-    class="btn btn-primary generate-button"
-  >
-    Generate My Business ✦
-  </button>
-
-  <div id="status" class="status"></div>
-
-</div>
-
-
-</div>
-
-
-<div class="builder-card preview-window">
-
-  <div class="card-header">
-    LIVE BUSINESS PREVIEW
-  </div>
-
-  <div id="preview" class="preview-content">
-
-    <div class="preview-placeholder">
-
-      <div>
-
-        <div style="font-size:35px;margin-bottom:10px;">
+        <div class="ai-icon">
           ✦
         </div>
 
-        <strong>
-          Your business will appear here
-        </strong>
+        <div>
+          <h1>AI Business Builder</h1>
+          <p>Tell LaunchForge what you want to build.</p>
+        </div>
 
-        <p style="margin-top:7px;">
-          Enter an idea on the left to begin.
+      </div>
+
+
+      <!-- CHAT -->
+
+      <div id="chatMessages" class="chat-messages">
+
+        <div class="message ai">
+          Hi! I'm LaunchForge AI. Tell me what kind of business you want to create and I'll generate a business concept for you.
+        </div>
+
+      </div>
+
+
+      <!-- INPUT -->
+
+      <div class="builder-input-area">
+
+        <textarea
+          id="businessPrompt"
+          placeholder="Example: Build me a profitable mobile car detailing business..."
+          rows="5"
+        ></textarea>
+
+        <button
+          id="generateBtn"
+          type="button"
+          class="generate-button"
+        >
+          Generate My Business ✦
+        </button>
+
+        <p class="input-hint">
+          Press Ctrl + Enter to generate
         </p>
 
       </div>
 
-    </div>
-
-  </div>
-
-</div>
+    </section>
 
 
-</div>
+    <!-- RIGHT SIDE -->
+
+    <section class="preview-panel">
+
+      <div class="preview-header">
+
+        <div>
+          <span class="preview-label">LIVE PREVIEW</span>
+          <h2>Your Business</h2>
+        </div>
+
+        <span class="live-status">
+          ● LIVE
+        </span>
+
+      </div>
 
 
-</main>
+      <div id="preview" class="preview-content">
 
-</div>
+        <div class="empty-preview">
+
+          <div class="empty-icon">
+            ✦
+          </div>
+
+          <h2>Your business will appear here</h2>
+
+          <p>
+            Describe your business idea on the left and LaunchForge AI will create your first business concept.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
 
 
-<script src="builder.js"></script>
+  <script src="builder.js"></script>
 
 </body>
 </html>
